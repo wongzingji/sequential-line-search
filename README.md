@@ -1,3 +1,12 @@
+# Introduction
+This repository is based on [Yuki Koyama-san's work](https://github.com/yuki-koyama/sequential-line-search/tree/master) but focus on Python implementation.
+
+## Modifications
+- Added the interface for displaying the dynamic process of updating the slider space, the parameter space and the function curve / image. \
+in `gui/window.py` using `PyQt5`
+- Added a script of Python examples \
+in `python-examples/seq-line-search-vis.py` 
+
 # Sequential Line Search
 
 ![](https://github.com/yuki-koyama/sequential-line-search/workflows/macOS/badge.svg)
@@ -21,10 +30,6 @@ The core algorithm is implemented in `include/sequential-line-search/*.hpp` and 
 - **sequential_line_search_photo**: A visual interactive demo of the sequential line search method where a photograph is enhanced using six-dimensional parameters.
 
 This library has a [python binding](./python), named `pySequentialLineSearch`.
-
-## Project Web Site
-
-<https://koyama.xyz/project/sequential_line_search/>
 
 ## Publication
 
@@ -111,80 +116,6 @@ Ubuntu 18.04/20.04
 sudo apt install cmake libeigen3-dev
 ```
 
-## Examples
-
-Note: User interaction part is omitted from these examples.
-
-### C++
-
-```c++
-#include <iostream>
-#include <sequential-line-search/sequential-line-search.hpp>
-
-using Eigen::VectorXd;
-using sequential_line_search::SequentialLineSearchOptimizer;
-
-double AskHumanForSliderManipulation(const std::pair<VectorXd, VectorXd>& slider_ends)
-{
-    // ...
-    // ...
-
-    return slider_position;
-}
-
-int main()
-{
-    // Instantiate an optimizer
-    constexpr int dim = 6;
-    SequentialLineSearchOptimizer optimizer(dim);
-
-    // Iterate optimization steps
-    constexpr int num_iters = 15;
-    for (int i = 0; i < num_iters; ++i)
-    {
-        // Retrieve a slider space
-        const std::pair<VectorXd, VectorXd> slider_ends = optimizer.GetSliderEnds();
-
-        // Query slider manipulation
-        const double slider_position = AskHumanForSliderManipulation(slider_ends);
-
-        // Feed the slider manipulation result to the optimizer
-        optimizer.SubmitLineSearchResult(slider_position);
-    }
-
-    // Display the found solution
-    std::cout << optimizer.GetMaximizer() << std::endl;
-
-    return 0;
-}
-```
-
-### Python
-
-```python
-import pySequentialLineSearch
-import numpy
-
-def ask_human_for_slider_manipulation(slider_ends):
-    # ...
-    # ...
-
-    return slider_position
-
-def main():
-    optimizer = pySequentialLineSearch.SequentialLineSearchOptimizer(6)
-
-    for i in range(15):
-        slider_ends = optimizer.get_slider_ends()
-        slider_position = ask_human_for_slider_manipulation(slider_ends)
-        optimizer.submit_line_search_result(slider_position)
-
-    print(optimizer.get_maximizer())
-
-if __name__ == '__main__':
-    main()
-```
-
 ## Supported Environments
 
 We have tested the C++ portion of our codebase on macOS using the clang compiler and on Ubuntu 20.04 using the g++ compiler. As for the Python portion, it has been tested on versions 3.7 through 3.11.
@@ -238,14 +169,3 @@ Sequential Gallery (SIGGRAPH 2020) is a more recent publication on the same topi
 BO as Assistant (UIST 2022) is a research project using this library for a different purpose (i.e., for generating design suggestions during slider manipulation).
 - Project page: <https://koyama.xyz/project/bo-as-assistant/>
 
-## License
-
-MIT License.
-
-## Contributing
-
-Issue reports, suggestions, requests, and PRs are highly welcomed.
-
-## Contact
-
-Yuki Koyama (<yuki@koyama.xyz>)
