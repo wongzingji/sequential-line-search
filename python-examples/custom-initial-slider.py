@@ -47,10 +47,12 @@ def main():
 
     for i in range(30):
         slider_ends = optimizer.get_slider_ends()
+        print(slider_ends)
         slider_position = ask_human_for_slider_manipulation(slider_ends)
         optimizer.submit_feedback_data(slider_position)
-
-        residual = np.linalg.norm(optimizer.get_maximizer() - 0.2)
+        x = optimizer.get_maximizer()
+        print(x)
+        residual = np.linalg.norm(x - 0.2)
         print("[#iters = " + str(i + 1) + "] residual: " + str(residual))
 
 
