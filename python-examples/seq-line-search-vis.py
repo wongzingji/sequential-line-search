@@ -1,7 +1,7 @@
 import pySequentialLineSearch
 import numpy as np
 import sys
-from typing import Optional, Tuple
+from typing import Tuple
 from PyQt5.QtWidgets import QApplication
 sys.path.append('./')
 from gui.window import UIWidget
@@ -76,7 +76,6 @@ def main():
 
     for i in range(30):
         w.update_window()
-        # print(f'iteration{i}: max value {fmax}')
         time.sleep(1)
 
     sys.exit(app.exec_())

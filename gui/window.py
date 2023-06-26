@@ -1,10 +1,5 @@
-import sys
-import time
-import functools
-
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QApplication, QHBoxLayout, QLabel, QSizePolicy, QSlider, QSpacerItem, \
-    QVBoxLayout, QWidget, QMessageBox
+from PyQt5.QtWidgets import QApplication, QHBoxLayout, QLabel, QSlider, QVBoxLayout, QWidget
 from PyQt5.QtGui import QImage, QPixmap
 
 import pyqtgraph as pg
