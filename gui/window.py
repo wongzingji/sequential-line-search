@@ -5,8 +5,6 @@ from PyQt5.QtGui import QImage, QPixmap
 import pyqtgraph as pg
 import numpy as np
 
-import cv2
-
 
 class SliderV(QWidget):
     '''

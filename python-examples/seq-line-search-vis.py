@@ -74,7 +74,8 @@ def main():
     w = UIWidget(calc_simulated_objective_func, PARAMS, optimizer, ask_human_for_slider_manipulation)
     w.show()
 
-    for i in range(30):
+    time.sleep(10)
+    for i in range(15):
         w.update_window()
         time.sleep(1)
 
