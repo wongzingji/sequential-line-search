@@ -1,9 +1,13 @@
-# Introduction
 This repository is based on [Yuki Koyama-san's work](https://github.com/yuki-koyama/sequential-line-search/tree/master) but focus on Python implementation.
 
-## Modifications
+# Modifications
 - Added the interface for displaying the dynamic process of updating the slider space, the parameter space and the function curve / image. \
 in `gui/window.py` using `PyQt5`
+
+<p align="center">
+<img src="docs/demo.gif" width=50% height=50%/>
+</p>
+
 - Added a script of Python examples \
 in `python-examples/seq-line-search-vis.py` 
 
