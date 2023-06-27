@@ -3,13 +3,17 @@ This repository is based on [Yuki Koyama-san's work](https://github.com/yuki-koy
 # Modifications
 - Added the interface for displaying the dynamic process of updating the slider space, the parameter space and the function curve / image. \
 in `gui/window.py` using `PyQt5`
+- Added a script of Python examples \
+in `python-examples/seq-line-search-vis.py` 
 
+**Demos**:
 <p align="center">
 <img src="docs/demo.gif" width=50% height=50%/>
 </p>
 
-- Added a script of Python examples \
-in `python-examples/seq-line-search-vis.py` 
+<p align="center">
+<img src="docs/img_interface.png" width=50%/>
+</p>
 
 # Sequential Line Search
 
@@ -23,6 +27,35 @@ A C++ library for performing the **sequential line search** method (which is a h
 
 ![](docs/concept.jpg)
 
+## Publication
+
+Yuki Koyama, Issei Sato, Daisuke Sakamoto, and Takeo Igarashi. 2017. Sequential Line Search for Efficient Visual Design Optimization by Crowds. ACM Trans. Graph. 36, 4, pp.48:1--48:11 (2017). (a.k.a. Proceedings of SIGGRAPH 2017)
+DOI: https://doi.org/10.1145/3072959.3073598
+
+![](docs/publication.jpg)
+
+## Installation (Python)
+(For the C++ installation please refer to the [original repository](https://github.com/yuki-koyama/sequential-line-search/tree/master).)
+
+This library has a [python binding](./python), named `pySequentialLineSearch`, which is a subset of the C++ library realized by [pybind11](https://github.com/pybind/pybind11).
+
+### Prerequisites
+Eigen <http://eigen.tuxfamily.org/>
+```
+# macOS
+brew install cmake eigen
+
+# Linux
+sudo apt install cmake libeigen3-dev
+```
+
+### Install via PyPI
+(Tested on Python `3.6`, `3.7`, and `3.8`.)
+```bash
+pip install git+https://github.com/yuki-koyama/sequential-line-search
+```
+
+## Core code
 The core algorithm is implemented in `include/sequential-line-search/*.hpp` and `src/*.cpp`. This repository also contains the following example demos:
 
 - **bayesian_optimization_1d**: A simple demo of the standard Bayesian optimization applied to a one-dimensional test function.
@@ -33,91 +66,9 @@ The core algorithm is implemented in `include/sequential-line-search/*.hpp` and 
 - **sequential_line_search_2d_gui**: A visual interactive demo of the sequential line search method applied to a two-dimensional test function.
 - **sequential_line_search_photo**: A visual interactive demo of the sequential line search method where a photograph is enhanced using six-dimensional parameters.
 
-This library has a [python binding](./python), named `pySequentialLineSearch`.
-
-## Publication
-
-Yuki Koyama, Issei Sato, Daisuke Sakamoto, and Takeo Igarashi. 2017. Sequential Line Search for Efficient Visual Design Optimization by Crowds. ACM Trans. Graph. 36, 4, pp.48:1--48:11 (2017). (a.k.a. Proceedings of SIGGRAPH 2017)
-DOI: https://doi.org/10.1145/3072959.3073598
-
-![](docs/publication.jpg)
-
-## Dependencies
-
-### Required for Core Algorithms
-
-- Eigen <http://eigen.tuxfamily.org/> (`brew install eigen` / `sudo apt install libeigen3-dev`)
-- NLopt <https://nlopt.readthedocs.io/> (included via gitsubmodule)
-- timer <https://github.com/yuki-koyama/timer> (included via gitsubmodule)
-- mathtoolbox <https://github.com/yuki-koyama/mathtoolbox> (included via gitsubmodule)
-- nlopt-util <https://github.com/yuki-koyama/nlopt-util> (included via gitsubmodule)
-- parallel-util <https://github.com/yuki-koyama/parallel-util> (included via gitsubmodule)
-
-### Required for Command Line Demos
-
-- (None)
-
-To build these demos, the CMake variable: `SEQUENTIAL_LINE_SEARCH_BUILD_COMMAND_DEMOS` should be set `ON`.
-
-### Required for Visual Demos
-
-- Qt5 <http://doc.qt.io/qt-5/> (`brew install qt@5` / `sudo apt install qt5-default`)
-- rand-util <https://github.com/yuki-koyama/rand-util> (included via gitsubmodule)
-- tinycolormap <https://github.com/yuki-koyama/tinycolormap> (included via gitsubmodule)
-
-To build these demos, the CMake variable: `SEQUENTIAL_LINE_SEARCH_BUILD_VISUAL_DEMOS` should be set `ON`.
-
-### Required for Photo Enhancement Demos
-
-- Qt5 <http://doc.qt.io/qt-5/> (`brew install qt@5` / `sudo apt install qt5-default`)
-- enhancer <https://github.com/yuki-koyama/enhancer> (included via gitsubmodule)
-- tinycolormap <https://github.com/yuki-koyama/tinycolormap> (included via gitsubmodule)
-
-To build these demos, the CMake variable: `SEQUENTIAL_LINE_SEARCH_BUILD_PHOTO_DEMOS` should be set `ON`. They require runtime environments to support OpenGL 3.2 Core Profile and GLSL 3.3.
-
-### Required for Experimental Python Binding
-
-- pybind11 <https://github.com/pybind/pybind11> (included via gitsubmodule)
-
-To enable python binding, the CMake variable: `SEQUENTIAL_LINE_SEARCH_BUILD_PYTHON_BINDING` should be set `ON`.
-
-## How to Compile and Run (C++)
-
-We use [cmake](https://cmake.org/) (3.3 or above) for managing the source codes. You can compile the core module and the demo applications at once by, for example,
+To use the demos, please follow the c++ installation and run for example
 ```bash
-git clone https://github.com/yuki-koyama/sequential-line-search.git --recursive
-cd sequential-line-search
-mkdir build
-cd build
-cmake ../
-make
-```
-Then you can run the applications by, for example,
-```
 ./demos/sequential_line_search_nd/SequentialLineSearchNd
-```
-
-We tested on macOS (10.15) only. We are aware that the visual demos cannot be built as it is in other OSs; some OpenGL paths etc. need to be resolved. Pull requests welcome.
-
-## How to Install (Python)
-
-`pySequentialLineSearch` is a subset of Python bindings of the C++ library. Tested on Python `3.6`, `3.7`, and `3.8`.
-
-It can be installed via PyPI:
-```bash
-pip install git+https://github.com/yuki-koyama/sequential-line-search
-```
-
-### Prerequisites
-
-macOS
-```
-brew install cmake eigen
-```
-
-Ubuntu 18.04/20.04
-```
-sudo apt install cmake libeigen3-dev
 ```
 
 ## Supported Environments
