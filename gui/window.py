@@ -152,8 +152,7 @@ class UIWidget(QWidget):
 
         # # update
         # if not determine_fn:
-        #     self.slider.slider.valueChanged.connect(self.update_sliders)
-        # self.sliders[-1].slider.valueChanged.connect(self.update_window)
+        #     self.slider.slider.valueChanged.connect(self.update_window)
     
     def update_sliders(self):
         slider_ends = self.optimizer.get_slider_ends()
@@ -177,6 +176,9 @@ class UIWidget(QWidget):
         return unscaled_xs
 
     def update_window(self):
+        '''
+        Upadte the whole window of the interface
+        '''
         # update param bars
         unscaled_xs = self.update_sliders()
 
